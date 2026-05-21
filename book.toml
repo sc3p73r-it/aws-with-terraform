@@ -6,4 +6,4 @@ src = "src"
 title = "AWS with Terraform"
 
 [output.html]
-logo = "cover.png"
+logo = "src/0.cover.png"
