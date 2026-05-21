@@ -1,3 +1,6 @@
-- name: Build mdbook
-  run: mdbook build
-  working-directory: ./docs  # Change this to wherever your book.toml lives
+[book]
+authors = ["Sc3p73r"]
+language = "mm"
+multilingual = false
+src = "src"
+title = "AWS with Terraform"
