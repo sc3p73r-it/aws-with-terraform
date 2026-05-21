@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS with Terraform - Book Cover</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0a0a0f;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .book-cover {
+    width: 600px;
+    height: 850px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 
+      0 25px 60px rgba(0, 0, 0, 0.5),
+      0 0 120px rgba(99, 102, 241, 0.15),
+      0 0 60px rgba(255, 153, 0, 0.1);
+  }
+
+  /* Background Gradient */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(135deg, #0f0c29 0%, #1a1145 25%, #141038 50%, #0d1b3e 75%, #0a1628 100%);
+  }
+
+  /* Grid Pattern */
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Animated Glow Orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+  }
+
+  .orb-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #ff9900 0%, transparent 70%);
+    top: -50px;
+    right: -80px;
+    opacity: 0.25;
+  }
+
+  .orb-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+    bottom: 100px;
+    left: -100px;
+    opacity: 0.2;
+  }
+
+  .orb-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+    top: 350px;
+    right: -30px;
+    opacity: 0.15;
+  }
+
+  /* Infrastructure Lines */
+  .infra-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+  }
+
+  .infra-lines svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 45px;
+  }
+
+  /* Top Badge */
+  .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: fit-content;
+    backdrop-filter: blur(10px);
+  }
+
+  .top-badge .dot {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+  }
+
+  /* Logo Section */
+  .logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .logo-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-aws {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.15), rgba(255, 153, 0, 0.05));
+    border: 1px solid rgba(255, 153, 0, 0.25);
+  }
+
+  .logo-terraform {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.05));
+    border: 1px solid rgba(124, 58, 237, 0.25);
+  }
+
+  .logo-box svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .logo-connector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logo-connector span {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+  }
+
+  .logo-connector span:nth-child(2) {
+    width: 20px;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, rgba(255, 153, 0, 0.4), rgba(124, 58, 237, 0.4));
+  }
+
+  /* Title */
+  .title-section {
+    margin-top: 40px;
+  }
+
+  .title-main {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+  }
+
+  .title-aws {
+    background: linear-gradient(135deg, #ff9900, #ffb84d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .title-with {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+    font-size: 36px;
+    letter-spacing: 0;
+    margin: 0 4px;
+  }
+
+  .title-terraform {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Divider */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff9900, #7c3aed);
+    border-radius: 2px;
+    margin-top: 28px;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    margin-top: 24px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    max-width: 420px;
+  }
+
+  /* Myanmar Text */
+  .myanmar-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.35);
+    line-height: 1.8;
+  }
+
+  /* Bottom Section */
+  .bottom-section {
+    margin-top: auto;
+  }
+
+  /* Feature Tags */
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .feature-tag {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.5px;
+  }
+
+  .feature-tag.highlight {
+    border-color: rgba(255, 153, 0, 0.2);
+    color: rgba(255, 153, 0, 0.7);
+  }
+
+  .feature-tag.purple {
+    border-color: rgba(124, 58, 237, 0.2);
+    color: rgba(124, 58, 237, 0.7);
+  }
+
+  /* Edition Bar */
+  .edition-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .edition-info {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .version-badge {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.1), rgba(124, 58, 237, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+  }
+
+  /* Decorative Corner */
+  .corner-decoration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    opacity: 0.03;
+  }
+
+  .corner-decoration svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Spine Effect */
+  .spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #ff9900, #7c3aed, #06b6d4);
+    z-index: 20;
+  }
+</style>
+</head>
+<body>
+
+<div class="book-cover">
+  <!-- Spine -->
+  <div class="spine"></div>
+
+  <!-- Background -->
+  <div class="bg-gradient"></div>
+  <div class="grid-pattern"></div>
+
+  <!-- Glow Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Infrastructure Lines -->
+  <div class="infra-lines">
+    <svg viewBox="0 0 600 850" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Network Lines -->
+      <path d="M 50 200 Q 150 250 300 220 Q 450 190 550 250" stroke="white" stroke-width="1"/>
+      <path d="M 50 400 Q 200 380 350 420 Q 500 460 550 400" stroke="white" stroke-width="1"/>
+      <path d="M 50 600 Q 150 580 300 620 Q 450 660 550 600" stroke="white" stroke-width="1"/>
+      
+      <!-- Nodes -->
+      <circle cx="100" cy="210" r="3" fill="white"/>
+      <circle cx="300" cy="220" r="3" fill="white"/>
+      <circle cx="500" cy="240" r="3" fill="white"/>
+      <circle cx="150" cy="395" r="3" fill="white"/>
+      <circle cx="350" cy="420" r="3" fill="white"/>
+      <circle cx="480" cy="415" r="3" fill="white"/>
+      <circle cx="120" cy="595" r="3" fill="white"/>
+      <circle cx="300" cy="620" r="3" fill="white"/>
+      <circle cx="450" cy="640" r="3" fill="white"/>
+      
+      <!-- Vertical Connections -->
+      <line x1="300" y1="220" x2="350" y2="420" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <line x1="500" y1="240" x2="480" y2="415" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <line x1="150" y1="395" x2="120" y2="595" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Top Badge -->
+    <div class="top-badge">
+      <span class="dot"></span>
+      Infrastructure as Code
+    </div>
+
+    <!-- Logos -->
+    <div class="logos">
+      <div class="logo-box logo-aws">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- AWS Cloud Icon -->
+          <path d="M24 8C17.4 8 12 12.5 12 18.2c0 1.1.2 2.2.5 3.2C9.3 22.4 7 25.3 7 28.8 7 33.3 10.6 37 15 37h22c4.4 0 8-3.6 8-8 0-3.5-2.3-6.5-5.5-7.5.3-1 .5-2 .5-3C40 12.8 32.8 8 24 8z" fill="#FF9900" fill-opacity="0.9"/>
+          <path d="M18 28l3-8h2l3 8h-2l-.7-2h-2.6l-.7 2h-2zm3-4h1.4l-.7-2.2L21 24zm9.5-4h2l-2.5 4 2.5 4h-2l-1.5-2.5L27 28h-2l2.5-4-2.5-4h2l1.5 2.5L30 20h-.5z" fill="white" fill-opacity="0.95"/>
+        </svg>
+      </div>
+      <div class="logo-connector">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="logo-box logo-terraform">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Terraform Logo -->
+          <path d="M18.2 10L28.2 15.8V27.3L18.2 21.5V10Z" fill="#7C3AED" fill-opacity="0.9"/>
+          <path d="M29.8 15.8L39.8 10V21.5L29.8 27.3V15.8Z" fill="#7C3AED" fill-opacity="0.55"/>
+          <path d="M8 15.8L18 10V21.5L8 27.3V15.8Z" fill="#7C3AED" fill-opacity="0.55"/>
+          <path d="M18.2 28.5L28.2 22.7V34.2L18.2 40V28.5Z" fill="#7C3AED" fill-opacity="0.9"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="title-section">
+      <div class="title-main">
+        <span class="title-aws">AWS</span><br>
+        <span class="title-with">with</span><br>
+        <span class="title-terraform">Terraform</span>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Subtitle -->
+    <p class="subtitle">
+      The Complete Guide to Infrastructure as Code on Amazon Web Services
+    </p>
+    <p class="myanmar-text">
+      မြန်မာဘာသာဖြင့် ရေးသားထားသော<br>
+      လက်တွေ့ကျသည့် AWS Infrastructure လမ်းညွှန်စာအုပ်
+    </p>
+
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <!-- Feature Tags -->
+      <div class="feature-tags">
+        <span class="feature-tag highlight">VPC</span>
+        <span class="feature-tag highlight">EC2</span>
+        <span class="feature-tag highlight">S3</span>
+        <span class="feature-tag highlight">RDS</span>
+        <span class="feature-tag highlight">IAM</span>
+        <span class="feature-tag purple">Modules</span>
+        <span class="feature-tag purple">CI/CD</span>
+        <span class="feature-tag">16 Chapters</span>
+      </div>
+
+      <!-- Edition Bar -->
+      <div class="edition-bar">
+        <span class="edition-info">2025 Edition • Myanmar Language</span>
+        <span class="version-badge">Terraform v1.x</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corner Decoration -->
+  <div class="corner-decoration">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="160" height="160" rx="10" stroke="white" stroke-width="2"/>
+      <rect x="50" y="50" width="100" height="100" rx="8" stroke="white" stroke-width="1.5"/>
+      <rect x="75" y="75" width="50" height="50" rx="6" stroke="white" stroke-width="1"/>
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

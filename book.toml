@@ -1,0 +1,3 @@
+- name: Build mdbook
+  run: mdbook build
+  working-directory: ./docs  # Change this to wherever your book.toml lives
