@@ -4,6 +4,3 @@ language = "mm"
 multilingual = false
 src = "src"
 title = "AWS with Terraform"
-
-[output.html]
-logo = "src/0.cover.png"

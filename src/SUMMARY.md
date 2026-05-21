@@ -1,5 +1,5 @@
 # Summary
-
+- [cover](cover.md)
 - [အခန်း (၁) - Terraform ဆိုတာ ဘာလဲ?](chapter-01.md)
 - [အခန်း (၂) - Terraform နှင့် AWS ပတ်ဝန်းကျင် ပြင်ဆင်ခြင်း](chapter-02.md)
 - [အခန်း (၃) - HCL (HashiCorp Configuration Language) အခြေခံ](chapter-03.md)
